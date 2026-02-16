@@ -28,6 +28,8 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
+            /* 强制字符编码 */
+            unicode-bidi: embed;
         }
         
         .container {
@@ -107,6 +109,7 @@
             /* 文本渲染优化 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            unicode-bidi: embed;
         }
         .slap-text.floating {
             animation: floatUp 0.8s ease-out forwards;
@@ -121,6 +124,7 @@
             /* 文本渲染优化 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            unicode-bidi: embed;
         }
         @keyframes slap {
             0% { opacity: 1; transform: rotate(-30deg) translateX(0); }
@@ -792,7 +796,8 @@
 
         function createFloatingText(originX, originY) {
             const count = 5 + Math.random() * 5;
-            const texts = ['啪!', '💥', '👋', 'biu~', '✨'];
+            // 使用英文替代中文字符以避免编码问题
+            const texts = ['BAM!', '💥', '👋', 'Biu~', '✨'];
             
             for (let i = 0; i < count; i++) {
                 setTimeout(() => {
@@ -845,6 +850,3 @@
     </script>
 </body>
 </html>
-
-
-
