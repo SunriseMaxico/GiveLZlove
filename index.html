@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <title>为刘振赐福！！</title>
     <style>
+        /* 基础样式 */
         body {
             display: flex;
             justify-content: center;
@@ -22,6 +24,10 @@
             padding-bottom: env(safe-area-inset-bottom);
             padding-left: env(safe-area-inset-left);
             padding-right: env(safe-area-inset-right);
+            /* 文本渲染优化 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
         
         .container {
@@ -31,7 +37,7 @@
             height: 600px;
         }
         
-        /* 头像 - 放大50%：150px → 225px */
+        /* 头像 */
         .avatar {
             width: 512px;
             height: 512px;
@@ -46,6 +52,9 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            /* 防止iOS Safari缩放 */
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
         }
         
         .avatar:hover {
@@ -56,7 +65,7 @@
             animation: shake 0.3s ease-out;
         }
         
-        /* 手掌 - 放大50%：60px×30px → 90px×45px */
+        /* 手掌 */
         .hand {
             position: absolute;
             width: 300px;
@@ -95,6 +104,9 @@
             pointer-events: none;
             white-space: nowrap;
             transform-origin: center center;
+            /* 文本渲染优化 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .slap-text.floating {
             animation: floatUp 0.8s ease-out forwards;
@@ -106,6 +118,9 @@
             transform: translateX(-50%);
             color: #666;
             font-size: 16px;
+            /* 文本渲染优化 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         @keyframes slap {
             0% { opacity: 1; transform: rotate(-30deg) translateX(0); }
@@ -123,7 +138,7 @@
             100% { opacity: 0; transform: translateY(-60px) scale(0.6) rotate(-10deg); }
         }
 
-        /* 移动设备DPI适配 */
+        /* 移动设备通用适配 */
         @media screen and (max-width: 768px) {
             .container {
                 width: 90vw;
@@ -185,58 +200,493 @@
         
         /* iOS设备特定适配 */
         @supports (-webkit-touch-callout: none) {
-            /* 针对iOS Safari的特殊样式 */
             body {
-                /* 确保页面内容不被底部安全区域遮挡 */
                 padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
             }
             
-            /* iOS按钮点击效果优化 */
             .avatar {
                 -webkit-tap-highlight-color: transparent;
             }
         }
         
-        /* iPhone X及以上设备的刘海屏适配 */
-        @media only screen 
-          and (device-width: 375px) 
-          and (device-height: 812px) 
-          and (-webkit-device-pixel-ratio: 3),
-         /* iPhone XS Max, iPhone XR */
-         only screen 
-          and (device-width: 414px) 
-          and (device-height: 896px) 
-          and (-webkit-device-pixel-ratio: 2),
-         only screen 
-          and (device-width: 414px) 
-          and (device-height: 896px) 
-          and (-webkit-device-pixel-ratio: 3),
-         /* iPhone 12 mini */
-         only screen 
-          and (device-width: 360px) 
-          and (device-height: 780px) 
-          and (-webkit-device-pixel-ratio: 3),
-         /* iPhone 12, 13, 14 */
-         only screen 
-          and (device-width: 390px) 
-          and (device-height: 844px) 
-          and (-webkit-device-pixel-ratio: 3),
-         /* iPhone 12 Pro, 13 Pro, 14 Pro */
-         only screen 
-          and (device-width: 390px) 
-          and (device-height: 844px) 
-          and (-webkit-device-pixel-ratio: 3),
-         /* iPhone 12 Pro Max, 13 Pro Max, 14 Pro Max */
-         only screen 
-          and (device-width: 428px) 
-          and (device-height: 926px) 
-          and (-webkit-device-pixel-ratio: 3) {
+        /* iPhone 6s - 4.7英寸屏幕 */
+        @media screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
             .container {
-                margin-top: env(safe-area-inset-top);
+                width: 90vw;
+                height: 90vw;
+                max-width: 400px;
+                max-height: 400px;
+            }
+            
+            .avatar {
+                width: 85vw;
+                height: 85vw;
+                max-width: 380px;
+                max-height: 380px;
+            }
+            
+            .hand {
+                width: 50vw;
+                height: 90vw;
+                max-width: 200px;
+                max-height: 400px;
+                right: -15px;
             }
             
             .hint {
-                bottom: calc(env(safe-area-inset-bottom) + 10px);
+                font-size: 14px;
+            }
+        }
+        
+        /* iPhone 6s Plus/7 Plus/8 Plus - 5.5英寸屏幕 */
+        @media screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 85vw;
+                height: 85vw;
+                max-width: 450px;
+                max-height: 450px;
+            }
+            
+            .avatar {
+                width: 80vw;
+                height: 80vw;
+                max-width: 420px;
+                max-height: 420px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 85vw;
+                max-width: 220px;
+                max-height: 450px;
+                right: -15px;
+            }
+        }
+        
+        /* iPhone X/XS/11 Pro - 5.8英寸屏幕 */
+        @media screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 350px;
+                max-height: 350px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 330px;
+                max-height: 330px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 180px;
+                max-height: 350px;
+                right: -10px;
+            }
+        }
+        
+        /* iPhone XR/11 - 6.1英寸屏幕 */
+        @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 380px;
+                max-height: 380px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 350px;
+                max-height: 350px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 200px;
+                max-height: 380px;
+                right: -15px;
+            }
+        }
+        
+        /* iPhone XS Max/11 Pro Max - 6.5英寸屏幕 */
+        @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 400px;
+                max-height: 400px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 370px;
+                max-height: 370px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 220px;
+                max-height: 400px;
+                right: -15px;
+            }
+        }
+        
+        /* iPhone 12/13/14 - 6.1英寸屏幕 */
+        @media screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 360px;
+                max-height: 360px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 340px;
+                max-height: 340px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 190px;
+                max-height: 360px;
+                right: -12px;
+            }
+        }
+        
+        /* iPhone 12 Pro/13 Pro/14 Pro - 6.1英寸屏幕 */
+        @media screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 360px;
+                max-height: 360px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 340px;
+                max-height: 340px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 190px;
+                max-height: 360px;
+                right: -12px;
+            }
+        }
+        
+        /* iPhone 12 Pro Max/13 Pro Max/14 Pro Max - 6.7英寸屏幕 */
+        @media screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 400px;
+                max-height: 400px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 380px;
+                max-height: 380px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 210px;
+                max-height: 400px;
+                right: -15px;
+            }
+        }
+        
+        /* iPhone 15/16 - 6.1英寸屏幕 */
+        @media screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 360px;
+                max-height: 360px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 340px;
+                max-height: 340px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 190px;
+                max-height: 360px;
+                right: -12px;
+            }
+        }
+        
+        /* iPhone 15 Pro/16 Pro - 6.1英寸屏幕 */
+        @media screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 360px;
+                max-height: 360px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 340px;
+                max-height: 340px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 190px;
+                max-height: 360px;
+                right: -12px;
+            }
+        }
+        
+        /* iPhone 15 Pro Max/16 Pro Max - 6.7英寸屏幕 */
+        @media screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) {
+            .container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 400px;
+                max-height: 400px;
+            }
+            
+            .avatar {
+                width: 75vw;
+                height: 75vw;
+                max-width: 380px;
+                max-height: 380px;
+            }
+            
+            .hand {
+                width: 45vw;
+                height: 80vw;
+                max-width: 210px;
+                max-height: 400px;
+                right: -15px;
+            }
+        }
+        
+        /* iPad 通用适配 */
+        @media screen and (min-width: 768px) and (orientation: portrait) {
+            .container {
+                width: 70vw;
+                height: 70vw;
+                max-width: 500px;
+                max-height: 500px;
+            }
+            
+            .avatar {
+                width: 65vw;
+                height: 65vw;
+                max-width: 450px;
+                max-height: 450px;
+            }
+            
+            .hand {
+                width: 35vw;
+                height: 70vw;
+                max-width: 250px;
+                max-height: 500px;
+                right: -20px;
+            }
+        }
+        
+        @media screen and (min-width: 768px) and (orientation: landscape) {
+            .container {
+                width: 50vh;
+                height: 50vh;
+                max-width: 500px;
+                max-height: 500px;
+            }
+            
+            .avatar {
+                width: 45vh;
+                height: 45vh;
+                max-width: 450px;
+                max-height: 450px;
+            }
+            
+            .hand {
+                width: 25vh;
+                height: 50vh;
+                max-width: 200px;
+                max-height: 500px;
+                right: -20px;
+            }
+        }
+        
+        /* iPad Mini */
+        @media screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) {
+            .container {
+                width: 60vw;
+                height: 60vw;
+                max-width: 450px;
+                max-height: 450px;
+            }
+            
+            .avatar {
+                width: 55vw;
+                height: 55vw;
+                max-width: 420px;
+                max-height: 420px;
+            }
+            
+            .hand {
+                width: 30vw;
+                height: 60vw;
+                max-width: 220px;
+                max-height: 450px;
+                right: -20px;
+            }
+        }
+        
+        /* iPad Air */
+        @media screen and (device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) {
+            .container {
+                width: 60vw;
+                height: 60vw;
+                max-width: 500px;
+                max-height: 500px;
+            }
+            
+            .avatar {
+                width: 55vw;
+                height: 55vw;
+                max-width: 470px;
+                max-height: 470px;
+            }
+            
+            .hand {
+                width: 30vw;
+                height: 60vw;
+                max-width: 240px;
+                max-height: 500px;
+                right: -20px;
+            }
+        }
+        
+        /* iPad Pro 11英寸 */
+        @media screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) {
+            .container {
+                width: 60vw;
+                height: 60vw;
+                max-width: 500px;
+                max-height: 500px;
+            }
+            
+            .avatar {
+                width: 55vw;
+                height: 55vw;
+                max-width: 470px;
+                max-height: 470px;
+            }
+            
+            .hand {
+                width: 30vw;
+                height: 60vw;
+                max-width: 240px;
+                max-height: 500px;
+                right: -20px;
+            }
+        }
+        
+        /* iPad Pro 12.9英寸 */
+        @media screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) {
+            .container {
+                width: 50vw;
+                height: 50vw;
+                max-width: 600px;
+                max-height: 600px;
+            }
+            
+            .avatar {
+                width: 45vw;
+                height: 45vw;
+                max-width: 550px;
+                max-height: 550px;
+            }
+            
+            .hand {
+                width: 25vw;
+                height: 50vw;
+                max-width: 250px;
+                max-height: 600px;
+                right: -20px;
+            }
+        }
+        
+        /* 针对未来iOS版本的通用适配 */
+        @media screen and (max-width: 320px) {
+            .container {
+                width: 95vw;
+                height: 95vw;
+                max-width: 300px;
+                max-height: 300px;
+            }
+            
+            .avatar {
+                width: 90vw;
+                height: 90vw;
+                max-width: 280px;
+                max-height: 280px;
+            }
+            
+            .hand {
+                width: 60vw;
+                height: 95vw;
+                max-width: 180px;
+                max-height: 300px;
+                right: -10px;
+            }
+            
+            .hint {
+                font-size: 12px;
+            }
+        }
+        
+        @media screen and (min-width: 1024px) {
+            .container {
+                width: 40vw;
+                height: 40vw;
+                max-width: 700px;
+                max-height: 700px;
+            }
+            
+            .avatar {
+                width: 35vw;
+                height: 35vw;
+                max-width: 650px;
+                max-height: 650px;
+            }
+            
+            .hand {
+                width: 20vw;
+                height: 40vw;
+                max-width: 300px;
+                max-height: 700px;
+                right: -30px;
             }
         }
     </style>
@@ -250,6 +700,68 @@
 
 
     <script>
+        // 设备检测函数
+        function detectDevice() {
+            const ua = navigator.userAgent;
+            const isIOS = /iPad|iPhone|iPod/.test(ua);
+            const isIPad = /iPad/.test(ua);
+            const isIPhone = /iPhone/.test(ua);
+            const isAndroid = /Android/.test(ua);
+            
+            // iOS版本检测
+            let iosVersion = null;
+            if (isIOS) {
+                const match = ua.match(/OS (\d+)_(\d+)_?(\d+)?/);
+                if (match) {
+                    iosVersion = parseInt(match[1]);
+                } else {
+                    // 对于新版本格式
+                    const newMatch = ua.match(/OS\s+(\d+)\s+/);
+                    if (newMatch) {
+                        iosVersion = parseInt(newMatch[1]);
+                    }
+                }
+            }
+            
+            // iPadOS检测
+            const isIPadOS = isIOS && !isIPhone && window.navigator.maxTouchPoints > 2;
+            
+            return {
+                isIOS,
+                isIPad,
+                isIPhone,
+                isAndroid,
+                iosVersion,
+                isIPadOS
+            };
+        }
+        
+        // 应用设备特定样式
+        const deviceInfo = detectDevice();
+        
+        if (deviceInfo.isIOS) {
+            document.body.style.webkitTextSizeAdjust = '100%';
+            
+            // 对iOS 17+进行特殊处理
+            if (deviceInfo.iosVersion && deviceInfo.iosVersion >= 17) {
+                document.documentElement.style.setProperty('--safe-area-top', 'env(safe-area-inset-top)');
+                document.documentElement.style.setProperty('--safe-area-bottom', 'env(safe-area-inset-bottom)');
+                document.documentElement.style.setProperty('--safe-area-left', 'env(safe-area-inset-left)');
+                document.documentElement.style.setProperty('--safe-area-right', 'env(safe-area-inset-right)');
+            }
+            
+            // 对未来iOS版本进行兼容性处理
+            if (deviceInfo.iosVersion && deviceInfo.iosVersion > 20) {
+                // 针对更高版本的iOS进行特殊处理
+                document.body.style.lineHeight = '1.4';
+            }
+        }
+        
+        // iPadOS特殊处理
+        if (deviceInfo.isIPadOS) {
+            document.body.classList.add('ipados');
+        }
+        
         const avatar = document.getElementById('avatar');
         const hand = document.getElementById('hand');
         const container = document.querySelector('.container');
