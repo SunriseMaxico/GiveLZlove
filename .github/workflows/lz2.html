@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>为刘振赐福！！</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/b0161fae-8ddf-46e4-9ed8-d5cbf8b55bad_lfyz.png?x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771245862%3B1771249462&q-key-time=1771245862%3B1771249462&q-header-list=&q-url-param-list=x-cos-traffic-limit&q-signature=a8c2dcf6cbeb161bb5f117bfe1f5ca36b94b421d');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            width: 600px;
+            height: 600px;
+        }
+        
+        /* 头像 - 放大50%：150px → 225px */
+        .avatar {
+            width: 512px;
+            height: 512px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.1s ease;
+            background-image: url('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/82a5d0b6-3481-49ff-b27e-9cc75d5c0c60_lz.jpg?x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771247150%3B1771250750&q-key-time=1771247150%3B1771250750&q-header-list=&q-url-param-list=x-cos-traffic-limit&q-signature=0dfac2d28d61c08e5564d7b71bf15143bbf5ca85');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .avatar:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        
+        .avatar.clicked {
+            animation: shake 0.3s ease-out;
+        }
+        
+        /* 手掌 - 放大50%：60px×30px → 90px×45px */
+        .hand {
+            position: absolute;
+            width: 300px;
+            height: 600px;
+            background-image: url('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/25f70092-c15e-4b46-9a17-4a8a347b5ac9_hand.png?x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771244481%3B1771248081&q-key-time=1771244481%3B1771248081&q-header-list=&q-url-param-list=x-cos-traffic-limit&q-signature=ab49063e1aa5f8cebc0d056ff192cf6ed06cfbea');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            border-radius: 15px;
+            top: 150px;
+            left: 350px;
+            opacity: 0; 
+            transform-origin: left center;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #cc6600;
+            z-index: 10;
+        }
+        
+        /* 手掌动画 */
+        .hand.slap-animation {
+            animation: slap 0.3s ease-out forwards;
+        }
+        
+        .slap-text {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            transform-origin: center center;
+        }
+        .slap-text.floating {
+            animation: floatUp 0.8s ease-out forwards;
+        }
+        .hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 16px;
+        }
+        @keyframes slap {
+            0% { opacity: 1; transform: rotate(-30deg) translateX(0); }
+            50% { opacity: 1; transform: rotate(30deg) translateX(75px); }
+            100% { opacity: 0; transform: rotate(-30deg) translateX(0); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(-15deg); }
+            75% { transform: translate(-50%, -50%) rotate(15deg); }
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(0.8) rotate(0deg); }
+            50% { opacity: 0.8; transform: translateY(-30px) scale(1) rotate(10deg); }
+            100% { opacity: 0; transform: translateY(-60px) scale(0.6) rotate(-10deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="avatar" id="avatar"></div>
+        <div class="hand" id="hand">✋</div>
+        <div class="hint">点击刘振为他献上最真挚的祝福。</div>
+    </div>
+
+
+    <script>
+        const avatar = document.getElementById('avatar');
+        const hand = document.getElementById('hand');
+        const container = document.querySelector('.container');
+
+        avatar.addEventListener('click', function(e) {
+            const slapSound = new Audio('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/f6b45d7b-b9be-471f-ac37-3c3bd7305754_pa.mp3?response-content-disposition=attachment%3B+filename%3D%22pa.mp3%22%3B+filename%2A%3DUTF-8%27%27pa.mp3&x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771244721%3B1771248321&q-key-time=1771244721%3B1771248321&q-header-list=&q-url-param-list=response-content-disposition%3Bx-cos-traffic-limit&q-signature=666c70c83849d7f7c8617b2accc4d6fc4cd19d9d');
+            slapSound.volume = 0.5;
+            slapSound.play().catch(e => console.log("Audio play failed:", e));
+            
+            // 手掌动画
+            hand.classList.remove('slap-animation');
+            void hand.offsetWidth;
+            hand.classList.add('slap-animation');
+            
+            // 头像晃动
+            this.classList.remove('clicked');
+            void this.offsetWidth;
+            this.classList.add('clicked');
+            
+            // 获取点击位置
+            const rect = container.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            
+            // 创建飘字效果
+            createFloatingText(clickX, clickY);
+        });
+
+        function createFloatingText(originX, originY) {
+            const count = 5 + Math.random() * 5;
+            const texts = ['啪!', '💥', '👋', 'biu~', '✨'];
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const textEl = document.createElement('div');
+                    textEl.className = 'slap-text floating';
+                    textEl.textContent = texts[Math.floor(Math.random() * texts.length)];
+                    
+                    const offsetX = (Math.random() - 0.5) * 60;
+                    const offsetY = (Math.random() - 0.5) * 60;
+                    textEl.style.left = (originX + offsetX) + 'px';
+                    textEl.style.top = (originY + offsetY) + 'px';
+                    
+                    const colors = ['#ff0000', '#ff6600', '#ffcc00', '#ff3366', '#00ccff'];
+                    textEl.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    const sizes = [16, 18, 20, 22, 24];
+                    textEl.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)] + 'px';
+                    
+                    container.appendChild(textEl);
+                    
+                    setTimeout(() => {
+                        textEl.remove();
+                    }, 800);
+                }, i * 50);
+            }
+        }
+        
+        // 空格键触发
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                const rect = avatar.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2 - containerRect.left;
+                const centerY = rect.top + rect.height / 2 - containerRect.top;
+                const slapSound = new Audio('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/f6b45d7b-b9be-471f-ac37-3c3bd7305754_pa.mp3?response-content-disposition=attachment%3B+filename%3D%22pa.mp3%22%3B+filename%2A%3DUTF-8%27%27pa.mp3&x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771244721%3B1771248321&q-key-time=1771244721%3B1771248321&q-header-list=&q-url-param-list=response-content-disposition%3Bx-cos-traffic-limit&q-signature=666c70c83849d7f7c8617b2accc4d6fc4cd19d9d');
+                slapSound.volume = 0.5;
+                slapSound.play().catch(e => console.log("Audio play failed:", e));
+                
+                createFloatingText(centerX, centerY);
+                
+                hand.classList.remove('slap-animation');
+                void hand.offsetWidth;
+                hand.classList.add('slap-animation');
+                
+                avatar.classList.remove('clicked');
+                void avatar.offsetWidth;
+                avatar.classList.add('clicked');
+            }
+        });
+    </script>
+</body>
+</html>
