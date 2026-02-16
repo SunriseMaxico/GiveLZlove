@@ -33,7 +33,7 @@
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: transform 0.1s ease;
-            background-image: url('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/82a5d0b6-3481-49ff-b27e-9cc75d5c0c60_lz.jpg?x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771247150%3B1771250750&q-key-time=1771247150%3B1771250750&q-header-list=&q-url-param-list=x-cos-traffic-limit&q-signature=0dfac2d28d61c08e5564d7b71bf15143bbf5ca85');
+            background-image: url('lz.jpg');
             background-size: cover;
             background-position: center;
             position: absolute;
@@ -55,7 +55,7 @@
             position: absolute;
             width: 300px;
             height: 600px;
-            background-image: url('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/25f70092-c15e-4b46-9a17-4a8a347b5ac9_hand.png?x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771244481%3B1771248081&q-key-time=1771244481%3B1771248081&q-header-list=&q-url-param-list=x-cos-traffic-limit&q-signature=ab49063e1aa5f8cebc0d056ff192cf6ed06cfbea');
+            background-image: url('hand.png');
             background-size: cover;
             background-position: center;
             position: absolute;
@@ -132,7 +132,7 @@
         const container = document.querySelector('.container');
 
         avatar.addEventListener('click', function(e) {
-            const slapSound = new Audio('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/f6b45d7b-b9be-471f-ac37-3c3bd7305754_pa.mp3?response-content-disposition=attachment%3B+filename%3D%22pa.mp3%22%3B+filename%2A%3DUTF-8%27%27pa.mp3&x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771244721%3B1771248321&q-key-time=1771244721%3B1771248321&q-header-list=&q-url-param-list=response-content-disposition%3Bx-cos-traffic-limit&q-signature=666c70c83849d7f7c8617b2accc4d6fc4cd19d9d');
+            const slapSound = new Audio('pa.mp3');
             slapSound.volume = 0.5;
             slapSound.play().catch(e => console.log("Audio play failed:", e));
             
@@ -192,7 +192,7 @@
                 const containerRect = container.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2 - containerRect.left;
                 const centerY = rect.top + rect.height / 2 - containerRect.top;
-                const slapSound = new Audio('https://dehoing-drive-bj-1300089193.cos.ap-beijing.myqcloud.com/uploads/6/lz/f6b45d7b-b9be-471f-ac37-3c3bd7305754_pa.mp3?response-content-disposition=attachment%3B+filename%3D%22pa.mp3%22%3B+filename%2A%3DUTF-8%27%27pa.mp3&x-cos-traffic-limit=10240000&q-sign-algorithm=sha1&q-ak=AKIDSklX2HFxPwCBvOaVAYeT2KK3VgaDi04r&q-sign-time=1771244721%3B1771248321&q-key-time=1771244721%3B1771248321&q-header-list=&q-url-param-list=response-content-disposition%3Bx-cos-traffic-limit&q-signature=666c70c83849d7f7c8617b2accc4d6fc4cd19d9d');
+                const slapSound = new Audio('pa.mp3');
                 slapSound.volume = 0.5;
                 slapSound.play().catch(e => console.log("Audio play failed:", e));
                 
